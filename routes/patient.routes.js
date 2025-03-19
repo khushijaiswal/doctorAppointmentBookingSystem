@@ -1,4 +1,4 @@
-const { BookAppointment, fetchDoctors, cancelAppointment, fetchAppointments, fetchDoctorsById } = require("../controller/patient.controller")
+const { BookAppointment, fetchDoctors, cancelAppointment, fetchAppointments, fetchDoctorsById, fetchHistoryAppointments } = require("../controller/patient.controller")
 
 const router = require("express").Router()
 router
@@ -8,6 +8,7 @@ router
     .post("/bookAppointment-patient", BookAppointment)
     .put("/cancelAppointment-patient/:aid", cancelAppointment)
     .get("/fetchAppointment-patient", fetchAppointments)
+    .get("/fetchHistoryAppointment-patient", fetchHistoryAppointments)
 
 
 module.exports = router

@@ -68,3 +68,9 @@ exports.fetchAppointments = asyncHandler(async (req, res) => {
         .populate('doctorId', 'name email address phone specialization')
     return res.json({ message: "Appointments fetched successfully", result })
 })
+
+exports.fetchHistoryAppointments = asyncHandler(async (req, res) => {
+    const result = await Appointment.find({ patientId: req.loggedInUser, isDeleted: false, status: "Completed" })
+        .populate('doctorId', 'name email address phone specialization')
+    return res.json({ message: "History Appointments fetched successfully", result })
+})

@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler")
 
 exports.fetchDoctorsPublic = asyncHandler(async (req, res) => {
     try {
-        const result = await Doctor.find({}).select("-password")
+        const result = await Doctor.find({ isActive: true }).select("-password")
         res.json({ message: "Doctor fetch success", result })
     } catch (error) {
         console.log(error)

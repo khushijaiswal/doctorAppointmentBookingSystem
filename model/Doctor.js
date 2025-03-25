@@ -31,40 +31,6 @@ const doctorSchema = new mongoose.Schema({
             }
         }
     ],
-    // slotBooked: { type: Object, default: {} },
-    // appointments: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'Appointment'
-    //     }
-    // ],
-    // // ratings: {
-    // //     type: Number, default: 0
-    // // },
-    // // reviews: [
-    // //     {
-    // //         patientId: {
-    // //             type: mongoose.Schema.Types.ObjectId,
-    // //             ref: 'Patient'
-    // //         },
-    // //         comment: String,
-    // //         rating: Number,
-    // //         date: {
-    // //             type: Date,
-    // //             default: Date.now
-    // //         }
-    // //     }
-    // // ],
-    // payments: [
-    //     {
-    //         transactionId: String,
-    //         amount: Number,
-    //         date: {
-    //             type: Date,
-    //             default: Date.now
-    //         }
-    //     }
-    // ],
     isApproved: {
         type: Boolean,
         default: false

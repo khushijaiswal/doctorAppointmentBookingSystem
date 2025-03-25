@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const express = require("express")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
-const { patientProtected, doctorProtected } = require("./middleware/protected.middleware")
+const { patientProtected, doctorProtected, adminprotected } = require("./middleware/protected.middleware")
 require("dotenv").config()
 
 
@@ -21,7 +21,7 @@ app.use(cors({
 //     credentials: true
 // }))
 app.use("/api/auth", require("./routes/auth.routes"))
-app.use("/api/admin", require("./routes/admin.routes"))
+app.use("/api/admin", adminprotected, require("./routes/admin.routes"))
 app.use("/api/patient", patientProtected, require("./routes/patient.routes"))
 app.use("/api/doctor", doctorProtected, require("./routes/doctor.routes"))
 app.use("/api/public", require("./routes/public.routes"))

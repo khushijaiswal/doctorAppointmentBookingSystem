@@ -15,8 +15,10 @@ exports.showAppointmentsToDoctors = asyncHandler(async (req, res) => {
     }
 })
 exports.AcceptAppointment = asyncHandler(async (req, res) => {
+    console.log(req.params.id);
+
     try {
-        const result = await Appointment.findByIdAndUpdate(req.params.id, { status: "Accepted" }, { new: true });
+        const result = await Appointment.findByIdAndUpdate(req.params.aid, { status: "Accepted" }, { new: true });
         if (!result) {
             return res.status(404).json({ message: "Appointment not found" });
         }
@@ -26,9 +28,16 @@ exports.AcceptAppointment = asyncHandler(async (req, res) => {
     }
 });
 
+exports.updateAppointmentStatus = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    const { status } = req.body
+    console.log(req.body)
+    await Appointment.findByIdAndUpdate(id, { status }, { new: true, runValidators: true })
+    res.status(200).json({ message: "Appointment Status Update Successfully" })
+})
 exports.DeclineAppointment = asyncHandler(async (req, res) => {
     try {
-        const result = await Appointment.findByIdAndUpdate(req.params.id, { status: "Declined" }, { new: true });
+        const result = await Appointment.findByIdAndUpdate(req.params.aid, { status: "Declined" }, { new: true });
         if (!result) {
             return res.status(404).json({ message: "Appointment not found" });
         }

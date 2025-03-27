@@ -8,7 +8,7 @@ const Appointment = require("../model/Appointment")
 exports.showDoctorsToAmin = asyncHandler(async (req, res) => {
     try {
         const result = await Doctor.find({}).select("-password")
-        res.json({ message: "Doctor fetch success", results: result })
+        res.json({ message: "Doctor fetch success", result: result })
     } catch (error) {
         console.log(error)
         return res.json({ succes: false, message: error.message })

@@ -64,7 +64,7 @@ exports.cancelAppointment = asyncHandler(async (req, res) => {
 })
 
 exports.fetchAppointments = asyncHandler(async (req, res) => {
-    const result = await Appointment.find({ patientId: req.loggedInUser, isDeleted: false })
+    const result = await Appointment.find({ patientId: req.loggedInUser, isDeleted: false, status: { $in: ["Pending", "Accepted"] } })
         .populate('doctorId', 'name email address phone specialization')
     return res.json({ message: "Appointments fetched successfully", result })
 })

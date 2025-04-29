@@ -4,7 +4,7 @@ const Patient = require("../model/Patient")
 const Appointment = require("../model/Appointment")
 const redisClient = require("../redisClient");
 
-const CACHE_EXPIRY = 60 * 5; // 5 minutes
+const CACHE_EXPIRY = 60 * 2; // 1 minutes
 
 exports.fetchDoctors = asyncHandler(async (req, res) => {
     const cacheKey = "patient:doctors";
@@ -12,6 +12,7 @@ exports.fetchDoctors = asyncHandler(async (req, res) => {
     if (cached) {
         return res.json({ message: "Doctor fetch success (from cache)", result: JSON.parse(cached) });
     }
+    console.log(cached)
     try {
         const result = await Doctor.find({ isActive: true }).select("-password")
         res.json({ message: "Doctor fetch success", result })
@@ -91,6 +92,7 @@ exports.fetchAppointments = asyncHandler(async (req, res) => {
     if (cached) {
         return res.json({ message: "Appointment fetch success (from cache)", result: JSON.parse(cached) });
     }
+    console.log(cached)
     const result = await Appointment.find({ patientId: req.loggedInUser, isDeleted: false, status: { $in: ["Pending", "Accepted"] } })
         .populate('doctorId', 'name email address phone specialization')
     await redisClient.setEx(cacheKey, CACHE_EXPIRY, JSON.stringify(result));

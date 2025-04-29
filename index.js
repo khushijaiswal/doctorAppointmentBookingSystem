@@ -10,12 +10,17 @@ require("dotenv").config()
 const app = express()
 app.use(express.json()) // req.body
 app.use(cookieParser()) // req.cookies
-// app.use(express.static("dist"))
+app.use(express.static("dist"))
 app.use(cors({
     origin: true,
     credentials: true // cookie
 }))
 
+
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+    // res.status(404).json({ message: "resource not found" })
+})
 // app.use(cors({
 //     origin: "http://localhost:5173",
 //     credentials: true

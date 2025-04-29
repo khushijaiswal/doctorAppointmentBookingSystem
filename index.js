@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const path = require('path')
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 const { patientProtected, doctorProtected, adminprotected } = require("./middleware/protected.middleware")
